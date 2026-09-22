@@ -604,7 +604,8 @@
             </div>
 
             <!-- Updated Formspree Action Link -->
-            <form id="weddingRsvpForm" action="https://formspree.io/f/myezepoo" method="POST" class="space-y-4 max-w-md mx-auto">
+            <!--<form id="weddingRsvpForm" action="https://formspree.io/f/myezepoo" method="POST" class="space-y-4 max-w-md mx-auto">-->
+            <form id="weddingRsvpForm" action="https://script.google.com/macros/s/AKfycbzgG3p9oO3icgTB5lIH509tga_o6psonOnw68eHNX97SmR5S84W9mQhnxSfA6gBH0KzHQ/exec" method="POST" class="space-y-4 max-w-md mx-auto">
                 <div>
                     <label class="block font-serif text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Your Full Name *</label>
                     <input type="text" name="Guest Name" required placeholder="Enter your full name" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-dustyRose focus:ring-1 focus:ring-dustyRose text-sm">
@@ -893,7 +894,7 @@
         }
 
         // --- 8. RSVP SUBMISSION VIA AJAX TO FORMSPREE ---
-        document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
+       /*document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
             const submitBtn = document.getElementById('submitBtn');
@@ -923,7 +924,32 @@
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Send RSVP Response";
             }
+        });*/
+        // --- 8. RSVP SUBMISSION TO GOOGLE SHEETS ---
+document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Sending...";
+
+    try {
+        await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            mode: 'no-cors'
         });
+
+        form.classList.add('hidden');
+        document.getElementById('rsvpSuccess').classList.remove('hidden');
+        triggerConfetti();
+
+    } catch (error) {
+        alert("There was a problem submitting your RSVP response. Please try again.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send RSVP Response";
+    }
+});
     </script>
 </body>
 </html>
