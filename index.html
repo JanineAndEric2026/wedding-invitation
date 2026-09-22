@@ -57,7 +57,7 @@
             border-radius: 4px;
         }
 
-        /* Pale Pink Silk Curtain Mechanics & 'Alive' Animations */
+        /* Pale Pink Silk Curtain Mechanics */
         .curtain-container {
             position: fixed;
             top: 0;
@@ -70,7 +70,6 @@
             transition: opacity 1.2s ease-in-out, visibility 1.2s ease-in-out;
             touch-action: none;
         }
-
         .curtain-panel {
             width: 50vw;
             height: 100vh;
@@ -82,59 +81,24 @@
                 #d88a9a 60%, 
                 #f8e1e5 75%, 
                 #c87d8e 100%);
-            background-size: 120px 100%;
-            box-shadow: inset 0 0 80px rgba(170, 92, 108, 0.5);
+            background-size: 80px 100%;
+            box-shadow: inset 0 0 50px rgba(170, 92, 108, 0.35);
             position: relative;
             transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
-            will-change: transform;
         }
-
-        /* Bringing the curtain to life with a breathing/breeze sway effect */
         .curtain-left {
             transform-origin: left center;
             border-right: 3px solid rgba(212, 175, 55, 0.75);
-            animation: curtainBreezeLeft 6s ease-in-out infinite;
         }
-        
         .curtain-right {
             transform-origin: right center;
             border-left: 3px solid rgba(212, 175, 55, 0.75);
-            animation: curtainBreezeRight 6s ease-in-out infinite;
         }
-
-        @keyframes curtainBreezeLeft {
-            0%, 100% { transform: skewY(0deg) scaleX(1); }
-            50% { transform: skewY(0.8deg) scaleX(1.02); }
-        }
-
-        @keyframes curtainBreezeRight {
-            0%, 100% { transform: skewY(0deg) scaleX(1); }
-            50% { transform: skewY(-0.8deg) scaleX(1.02); }
-        }
-
-        /* Moving silk sheen overlay to look glossy and alive */
-        .curtain-panel::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.25) 50%, transparent 70%);
-            background-size: 200% 100%;
-            animation: silkShimmer 5s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes silkShimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
         .curtains-open .curtain-left {
-            transform: translateX(-100%) scaleX(0.9) !important;
-            animation: none;
+            transform: translateX(-100%);
         }
         .curtains-open .curtain-right {
-            transform: translateX(100%) scaleX(0.9) !important;
-            animation: none;
+            transform: translateX(100%);
         }
 
         /* Metallic Gold Shimmer Gradient */
@@ -639,6 +603,8 @@
                 </p>
             </div>
 
+            <!-- Updated Formspree Action Link -->
+            <!--<form id="weddingRsvpForm" action="https://formspree.io/f/myezepoo" method="POST" class="space-y-4 max-w-md mx-auto">-->
             <form id="weddingRsvpForm" action="https://script.google.com/macros/s/AKfycbzKJ8c1B2YP8vMU8xNBMrQcJgV-h5z8Z3gVCpd1zaGUHtY6r5eUBPgBJxQd8htOeRn-yg/exec" method="POST" class="space-y-4 max-w-md mx-auto">
                 <div>
                     <label class="block font-serif text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Your Full Name *</label>
@@ -739,19 +705,6 @@
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
-
-        // --- 1.5 INTERACTIVE CURTAIN MOUSE SWAY EFFECT ---
-        const curtainLeft = document.querySelector('.curtain-left');
-        const curtainRight = document.querySelector('.curtain-right');
-
-        window.addEventListener('mousemove', (e) => {
-            if (isCurtainOpen) return;
-            const xPos = (e.clientX / window.innerWidth - 0.5) * 10;
-            if (curtainLeft && curtainRight) {
-                curtainLeft.style.transform = `translateX(${xPos * 0.4}px)`;
-                curtainRight.style.transform = `translateX(${xPos * 0.4}px)`;
-            }
-        });
 
         // --- 2. CURTAIN REVEAL INTERACTION ---
         const curtainOverlay = document.getElementById('curtainOverlay');
@@ -940,8 +893,8 @@
             activeBtn.classList.remove('text-gray-600');
         }
 
-        // --- 8. RSVP SUBMISSION TO GOOGLE SHEETS ---
-        document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
+        // --- 8. RSVP SUBMISSION VIA AJAX TO FORMSPREE ---
+       /*document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
             const submitBtn = document.getElementById('submitBtn');
@@ -949,22 +902,54 @@
             submitBtn.innerText = "Sending...";
 
             try {
-                await fetch(form.action, {
-                    method: 'POST',
+                const response = await fetch(form.action, {
+                    method: form.method,
                     body: new FormData(form),
-                    mode: 'no-cors'
+                    headers: {
+                        'Accept': 'application/json'
+                    }
                 });
 
-                form.classList.add('hidden');
-                document.getElementById('rsvpSuccess').classList.remove('hidden');
-                triggerConfetti();
-
+                if (response.ok) {
+                    form.classList.add('hidden');
+                    document.getElementById('rsvpSuccess').classList.remove('hidden');
+                    triggerConfetti();
+                } else {
+                    alert("There was a problem submitting your RSVP response. Please try again.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Send RSVP Response";
+                }
             } catch (error) {
                 alert("There was a problem submitting your RSVP response. Please try again.");
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Send RSVP Response";
             }
+        });*/
+        // --- 8. RSVP SUBMISSION TO GOOGLE SHEETS ---
+document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Sending...";
+
+    try {
+        await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            mode: 'no-cors'
         });
+
+        form.classList.add('hidden');
+        document.getElementById('rsvpSuccess').classList.remove('hidden');
+        triggerConfetti();
+
+    } catch (error) {
+        alert("There was a problem submitting your RSVP response. Please try again.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send RSVP Response";
+    }
+});
     </script>
 </body>
 </html>
