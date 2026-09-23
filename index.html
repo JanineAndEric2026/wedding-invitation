@@ -57,7 +57,7 @@
             border-radius: 4px;
         }
 
-        /* Pale Pink Silk Curtain Mechanics & 'Alive' Animations */
+        /* Pale Pink Silk Curtain Mechanics */
         .curtain-container {
             position: fixed;
             top: 0;
@@ -89,7 +89,6 @@
             will-change: transform;
         }
 
-        /* Bringing the curtain to life with a breathing/breeze sway effect */
         .curtain-left {
             transform-origin: left center;
             border-right: 3px solid rgba(212, 175, 55, 0.75);
@@ -112,7 +111,6 @@
             50% { transform: skewY(-0.8deg) scaleX(1.02); }
         }
 
-        /* Moving silk sheen overlay to look glossy and alive */
         .curtain-panel::after {
             content: '';
             position: absolute;
@@ -137,27 +135,13 @@
             animation: none;
         }
 
-        /* Metallic Gold Shimmer Gradient */
-        .gold-shimmer-text {
-            background: linear-gradient(135deg, #B8860B 0%, #FFD700 25%, #DAA520 50%, #FFF8DC 75%, #B8860B 100%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: shine 4s linear infinite;
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
         /* Classical Arch Frame */
         .invitation-arch {
             border-radius: 240px 240px 0 0;
             box-shadow: 0 20px 40px -10px rgba(170, 92, 108, 0.15), 0 0 0 1px rgba(212, 175, 55, 0.35);
         }
 
-        /* Marble Background with Subtle Fluid Gradients */
+        /* Marble Background with Fluid Gradients */
         .bg-marble {
             background-color: #FAF6F0;
             background-image: 
@@ -201,39 +185,31 @@
     <canvas id="dustCanvas"></canvas>
 
     <div id="curtainOverlay" class="curtain-container">
-        <!-- Left Pale Pink Curtain Panel -->
+        <!-- Left Curtain Panel -->
         <div class="curtain-panel curtain-left flex items-center justify-end pr-4 sm:pr-8">
             <div class="hidden md:block text-oldRose/70 text-xs uppercase tracking-widest rotate-90 transform origin-right font-serif font-medium">Swipe / Drag To Open</div>
         </div>
         
-        <!-- Right Pale Pink Curtain Panel -->
+        <!-- Right Curtain Panel -->
         <div class="curtain-panel curtain-right flex items-center justify-start pl-4 sm:pl-8">
             <div class="hidden md:block text-oldRose/70 text-xs uppercase tracking-widest -rotate-90 transform origin-left font-serif font-medium">Wedding Invitation</div>
         </div>
 
-        <!-- Curtain Center Interactive CTA Button with Pale Pink Rose Flower SVG Icon -->
+        <!-- Curtain CTA Button -->
         <div id="curtainCta" class="absolute inset-0 z-10 flex flex-col items-center justify-center text-center p-6 bg-oldRose/20 backdrop-blur-[3px] transition-opacity duration-700">
             <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-amber-400 via-amber-200 to-amber-500 p-1 mb-6 shadow-2xl pulse-btn">
                 <button id="openCurtainsBtn" class="w-full h-full rounded-full bg-palePink/95 text-oldRose flex flex-col items-center justify-center border border-amber-300/80 hover:bg-white transition-all group p-2 shadow-inner">
-                    
-                    <!-- SVG Pale Pink Rose Flower Logo Icon -->
                     <svg class="w-10 h-10 sm:w-12 sm:h-12 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Outer Petals Layer -->
                         <path d="M50 10 C32 10, 18 24, 18 42 C18 64, 35 80, 50 90 C65 80, 82 64, 82 42 C82 24, 68 10, 50 10 Z" fill="#F8E1E5" stroke="#E8A5B2" stroke-width="1.5"/>
                         <path d="M25 35 C15 45, 18 65, 35 75 C45 80, 50 88, 50 88 C50 88, 20 70, 20 50 C20 40, 22 36, 25 35 Z" fill="#F4C3C9"/>
                         <path d="M75 35 C85 45, 82 65, 65 75 C55 80, 50 88, 50 88 C50 88, 80 70, 80 50 C80 40, 78 36, 75 35 Z" fill="#F4C3C9"/>
-                        
-                        <!-- Middle Petals Layer -->
                         <path d="M50 20 C38 20, 28 30, 28 44 C28 60, 42 70, 50 78 C58 70, 72 60, 72 44 C72 30, 62 20, 50 20 Z" fill="#E8A5B2"/>
                         <path d="M35 32 C28 40, 32 54, 45 62 C50 65, 50 70, 50 70 C50 70, 30 56, 30 42 C30 35, 32 33, 35 32 Z" fill="#C87D8E"/>
                         <path d="M65 32 C72 40, 68 54, 55 62 C50 65, 50 70, 50 70 C50 70, 70 56, 70 42 C70 35, 68 33, 65 32 Z" fill="#C87D8E"/>
-                        
-                        <!-- Inner Blossom Core -->
                         <path d="M50 28 C42 28, 36 34, 36 43 C36 53, 44 60, 50 66 C56 60, 64 53, 64 43 C64 34, 58 28, 50 28 Z" fill="#C87D8E"/>
                         <circle cx="50" cy="42" r="8" fill="#AA5C6C"/>
                         <path d="M47 38 C47 36, 53 36, 53 38 C53 43, 46 42, 50 46" stroke="#FAF6F0" stroke-width="2" stroke-linecap="round" fill="none"/>
                     </svg>
-
                     <span class="text-[10px] sm:text-xs tracking-widest uppercase font-bold text-oldRose mt-1">Open</span>
                 </button>
             </div>
@@ -276,8 +252,6 @@
         <!-- SECTION 1: INVITATION ARCH CARD -->
         <section id="invitation" class="pt-2">
             <div class="invitation-arch bg-white/95 backdrop-blur p-6 sm:p-12 text-center relative overflow-hidden border border-amber-200/80">
-                
-                <!-- Pale Pink Rose Flower SVG Header Decoration -->
                 <div class="flex justify-center mb-6">
                     <svg class="w-28 h-28 text-dustyPink" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M50 10 C32 10, 18 24, 18 42 C18 64, 35 80, 50 90 C65 80, 82 64, 82 42 C82 24, 68 10, 50 10 Z" fill="#F8E1E5" opacity="0.8"/>
@@ -291,13 +265,9 @@
 
                 <p class="font-serif uppercase tracking-[0.25em] text-xs sm:text-sm text-gray-500 mb-4">Together with our families, we</p>
                 
-                <h1 class="font-script text-6xl sm:text-8xl text-oldRose my-1 font-normal leading-tight drop-shadow-sm">
-                    Eric
-                </h1>
+                <h1 class="font-script text-6xl sm:text-8xl text-oldRose my-1 font-normal leading-tight drop-shadow-sm">Eric</h1>
                 <p class="font-serif italic text-xl text-caramelBrown my-1">and</p>
-                <h1 class="font-script text-6xl sm:text-8xl text-oldRose my-1 font-normal leading-tight drop-shadow-sm">
-                    Janine
-                </h1>
+                <h1 class="font-script text-6xl sm:text-8xl text-oldRose my-1 font-normal leading-tight drop-shadow-sm">Janine</h1>
 
                 <div class="my-6 flex items-center justify-center space-x-3">
                     <div class="h-[1px] w-16 bg-goldAccent/50"></div>
@@ -314,7 +284,6 @@
                     in the sacrament of the Holy Matrimony on
                 </p>
 
-                <!-- Wedding Date Highlight Box -->
                 <div class="bg-amber-50/70 rounded-2xl py-4 px-6 my-6 border border-amber-200/80 inline-block w-full max-w-md shadow-sm">
                     <p class="font-serif text-lg sm:text-2xl font-semibold tracking-wide text-gray-800 uppercase">
                         Saturday, The 21<sup>st</sup> of November, 2026
@@ -324,7 +293,6 @@
                     </p>
                 </div>
 
-                <!-- Ceremony & Reception Details -->
                 <div class="space-y-6 my-8 text-gray-700 font-serif">
                     <div class="bg-white/60 p-4 rounded-xl border border-pink-100/60 max-w-md mx-auto">
                         <i class="fa-solid fa-church text-oldRose text-xl mb-1"></i>
@@ -341,7 +309,6 @@
                     </div>
                 </div>
 
-                <!-- Footer Motto -->
                 <div class="mt-8 pt-4 border-t border-pink-100 flex justify-center items-center gap-2 text-xs text-dustyRose font-serif italic">
                     <i class="fa-solid fa-leaf text-green-700/40"></i>
                     <span>We look forward to celebrating with you</span>
@@ -350,14 +317,12 @@
             </div>
         </section>
 
+        <!-- SECTION 2: REVEAL THE DATE -->
         <section id="reveal" class="bg-white/90 backdrop-blur rounded-3xl p-6 sm:p-8 shadow-sm border border-blushPink/50 text-center relative overflow-hidden">
             <h2 class="font-script text-5xl text-oldRose mb-1">Reveal The Date</h2>
             <p class="font-serif italic text-xs sm:text-sm text-gray-500 uppercase tracking-widest mb-6">Scratch or tap the gold coins below to discover the date</p>
 
-            <!-- Scratch Coins Grid -->
             <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-8 my-4">
-                
-                <!-- Coin 1: Day -->
                 <div class="flex flex-col items-center">
                     <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden flex items-center justify-center bg-pink-50 border-2 border-goldAccent/50 shadow-inner">
                         <div class="text-center">
@@ -368,7 +333,6 @@
                     </div>
                 </div>
 
-                <!-- Coin 2: Month -->
                 <div class="flex flex-col items-center">
                     <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden flex items-center justify-center bg-pink-50 border-2 border-goldAccent/50 shadow-inner">
                         <div class="text-center">
@@ -379,7 +343,6 @@
                     </div>
                 </div>
 
-                <!-- Coin 3: Year -->
                 <div class="flex flex-col items-center">
                     <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden flex items-center justify-center bg-pink-50 border-2 border-goldAccent/50 shadow-inner">
                         <div class="text-center">
@@ -389,15 +352,14 @@
                         <canvas id="scratchCanvas3" class="scratch-canvas absolute inset-0 w-full h-full" width="112" height="112"></canvas>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Revealed Banner Message -->
             <div id="revealMessage" class="opacity-0 transition-opacity duration-700 mt-6 bg-blushPink/30 py-2.5 px-6 rounded-full inline-block border border-blushPink">
                 <p class="font-script text-3xl text-oldRose">We're getting married! 🎉</p>
             </div>
         </section>
 
+        <!-- COUNTDOWN TIMER -->
         <section class="bg-gradient-to-r from-dustyPink/25 via-blushPink/35 to-dustyPink/25 rounded-3xl p-6 sm:p-8 text-center border border-pink-200/80 shadow-sm">
             <h3 class="font-script text-5xl text-oldRose mb-1">Countdown</h3>
             <p class="font-serif text-xs uppercase tracking-widest text-gray-600 mb-6">Until our wedding celebration</p>
@@ -422,6 +384,7 @@
             </div>
         </section>
 
+        <!-- SECTION 3: ENTOURAGE -->
         <section id="entourage" class="bg-white/95 backdrop-blur rounded-3xl p-6 sm:p-10 shadow-sm border border-blushPink/50">
             <div class="text-center mb-8">
                 <h2 class="font-script text-5xl sm:text-6xl text-oldRose mb-1">The Entourage</h2>
@@ -429,14 +392,12 @@
                 <p class="font-serif italic text-xs text-gray-500">In the presence of our Lord Jesus Christ and together with our parents</p>
             </div>
 
-            <!-- Entourage Tab Controls -->
             <div class="flex justify-center flex-wrap gap-2 border-b border-pink-100 pb-4 mb-6 text-xs font-medium">
                 <button onclick="switchTab('parents')" id="tab-parents" class="tab-btn px-3.5 py-1.5 rounded-full bg-oldRose text-white transition-all shadow-sm">Parents & Sponsors</button>
                 <button onclick="switchTab('party')" id="tab-party" class="tab-btn px-3.5 py-1.5 rounded-full text-gray-600 hover:bg-pink-50 transition-all">Bridal Party</button>
                 <button onclick="switchTab('bearers')" id="tab-bearers" class="tab-btn px-3.5 py-1.5 rounded-full text-gray-600 hover:bg-pink-50 transition-all">Little Ones</button>
             </div>
 
-            <!-- Tab Content 1: Parents & Sponsors -->
             <div id="content-parents" class="tab-content space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center bg-amber-50/50 p-5 rounded-2xl border border-amber-100">
                     <div>
@@ -451,7 +412,6 @@
                     </div>
                 </div>
 
-                <!-- Principal Sponsors -->
                 <div class="text-center pt-2">
                     <h4 class="font-serif text-sm font-bold uppercase tracking-widest text-oldRose mb-1">Principal Sponsors</h4>
                     <p class="font-serif italic text-xs text-gray-500 mb-4">To stand as principal witnesses in our exchange of vows</p>
@@ -470,7 +430,6 @@
                     </div>
                 </div>
 
-                <!-- Secondary Sponsors -->
                 <div class="text-center pt-2">
                     <h4 class="font-serif text-xs font-bold uppercase tracking-widest text-oldRose mb-3">Secondary Sponsors</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-serif">
@@ -496,7 +455,6 @@
                 </div>
             </div>
 
-            <!-- Tab Content 2: Bridal Party -->
             <div id="content-party" class="tab-content hidden space-y-6">
                 <div class="grid grid-cols-2 gap-4 text-center">
                     <div class="bg-pink-50/60 p-4 rounded-2xl border border-pink-100 shadow-sm">
@@ -535,7 +493,6 @@
                 </div>
             </div>
 
-            <!-- Tab Content 3: Bearers & Flower Girls -->
             <div id="content-bearers" class="tab-content hidden space-y-6">
                 <div class="text-center">
                     <p class="font-serif italic text-xs text-gray-500 mb-4">To carry our symbol of Love, Faith, and Treasure</p>
@@ -565,6 +522,7 @@
             </div>
         </section>
 
+        <!-- SECTION 4: ATTIRE GUIDE -->
         <section id="attire" class="bg-white/95 backdrop-blur rounded-3xl p-6 sm:p-10 shadow-sm border border-blushPink/50 text-center space-y-6">
             <div>
                 <h2 class="font-script text-5xl sm:text-6xl text-oldRose mb-1">Attire Guide</h2>
@@ -616,21 +574,24 @@
                 </div>
             </div>
 
-            <!-- Attire Format Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                <div class="bg-pink-50/40 p-5 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
-                    <i class="fa-solid fa-user-tie text-3xl text-caramelBrown mb-2"></i>
-                    <p class="font-serif text-sm font-semibold text-oldRose uppercase tracking-wider">Gentlemen</p>
-                    <p class="text-xs text-gray-600 mt-1 font-serif">Formal Suits / Barong Tagalog / Long Sleeves with Slacks</p>
+            <!-- Single Integrated Visual & Description Area -->
+            <div class="mt-8 flex flex-col items-center justify-center">
+                <div class="max-w-md w-full bg-creamBg/50 p-2 sm:p-4 rounded-3xl border border-amber-200/60 shadow-sm">
+                    <img src="viber_image_2026-09-23_11-27-57-822.jpg" alt="Gentlemen and Ladies Attire Guide" class="w-full h-auto rounded-2xl object-contain mx-auto">
                 </div>
-                <div class="bg-pink-50/40 p-5 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
-                    <i class="fa-solid fa-person-dress text-3xl text-dustyRose mb-2"></i>
-                    <p class="font-serif text-sm font-semibold text-oldRose uppercase tracking-wider">Ladies</p>
-                    <p class="text-xs text-gray-600 mt-1 font-serif">Formal Long Gowns / Elegant Cocktail Dresses</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 max-w-md w-full text-center">
+                    <div class="bg-pink-50/40 p-3 rounded-xl border border-pink-100">
+                        <p class="text-xs text-gray-600 font-serif">Polo Shirt / Longsleeve Shirt / Trousers / Slacks</p>
+                    </div>
+                    <div class="bg-pink-50/40 p-3 rounded-xl border border-pink-100">
+                        <p class="text-xs text-gray-600 font-serif">Any type of Dress / Blouse and Trousers / Skirt</p>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- SECTION 5: RSVP -->
         <section id="rsvp" class="bg-white/95 backdrop-blur rounded-3xl p-6 sm:p-10 shadow-sm border border-blushPink/50">
             <div class="text-center mb-6">
                 <h2 class="font-script text-5xl sm:text-6xl text-oldRose mb-1">RSVP</h2>
@@ -679,7 +640,6 @@
                 </button>
             </form>
 
-            <!-- Success Confirmation Modal/State -->
             <div id="rsvpSuccess" class="hidden text-center py-8 bg-pink-50/80 rounded-2xl border border-pink-200">
                 <i class="fa-solid fa-circle-check text-4xl text-oldRose mb-2 animate-bounce"></i>
                 <h3 class="font-script text-4xl text-oldRose">Thank You!</h3>
@@ -694,7 +654,7 @@
     </main>
 
     <script>
-        // --- 1. CANVAS DUST & ROSE PETALS PARTICLES ---
+        // --- 1. DUST & PETALS PARTICLES ---
         const dustCanvas = document.getElementById('dustCanvas');
         const dCtx = dustCanvas.getContext('2d');
         let particles = [];
@@ -740,19 +700,6 @@
         }
         animateParticles();
 
-        // --- 1.5 INTERACTIVE CURTAIN MOUSE SWAY EFFECT ---
-        const curtainLeft = document.querySelector('.curtain-left');
-        const curtainRight = document.querySelector('.curtain-right');
-
-        window.addEventListener('mousemove', (e) => {
-            if (isCurtainOpen) return;
-            const xPos = (e.clientX / window.innerWidth - 0.5) * 10;
-            if (curtainLeft && curtainRight) {
-                curtainLeft.style.transform = `translateX(${xPos * 0.4}px)`;
-                curtainRight.style.transform = `translateX(${xPos * 0.4}px)`;
-            }
-        });
-
         // --- 2. CURTAIN REVEAL INTERACTION ---
         const curtainOverlay = document.getElementById('curtainOverlay');
         const openCurtainsBtn = document.getElementById('openCurtainsBtn');
@@ -764,7 +711,6 @@
             curtainOverlay.classList.add('curtains-open');
             document.getElementById('curtainCta').style.opacity = '0';
             
-            // Trigger celebration confetti
             setTimeout(() => {
                 curtainOverlay.style.visibility = 'hidden';
                 triggerConfetti();
@@ -786,7 +732,7 @@
             }
         }, { passive: true });
 
-        // --- 3. AUDIO SYNTHESIS FOR BACKGROUND MELODY ---
+        // --- 3. AUDIO MELODY ---
         let audioCtx = null;
         let isMuted = true;
         const audioBtn = document.getElementById('audioToggle');
@@ -805,7 +751,7 @@
             if (isMuted) return;
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                const notes = [523.25, 659.25, 783.99, 1046.50];
                 notes.forEach((freq, idx) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
@@ -821,7 +767,7 @@
             } catch(e) {}
         }
 
-        // --- 4. SCRATCH-OFF CANVAS IMPLEMENTATION ---
+        // --- 4. SCRATCH CARD ---
         function initScratchCard(canvasId) {
             const canvas = document.getElementById(canvasId);
             const ctx = canvas.getContext('2d');
@@ -885,7 +831,7 @@
         initScratchCard('scratchCanvas2');
         initScratchCard('scratchCanvas3');
 
-        // --- 5. CONFETTI BURST ---
+        // --- 5. CONFETTI ---
         function triggerConfetti() {
             if (typeof confetti === 'function') {
                 confetti({
@@ -897,7 +843,7 @@
             }
         }
 
-        // --- 6. LIVE COUNTDOWN TIMER ---
+        // --- 6. COUNTDOWN TIMER ---
         const targetDate = new Date('November 21, 2026 14:30:00').getTime();
 
         function updateCountdown() {
@@ -926,7 +872,7 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // --- 7. ENTOURAGE TAB NAVIGATION ---
+        // --- 7. ENTOURAGE TABS ---
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -940,7 +886,7 @@
             activeBtn.classList.remove('text-gray-600');
         }
 
-        // --- 8. RSVP SUBMISSION TO GOOGLE SHEETS ---
+        // --- 8. RSVP SUBMISSION ---
         document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
